@@ -7,6 +7,7 @@ Files: ./public/3dModels/TraidarLogo.glb [1.79MB] > C:\Users\muzik\Documents\tra
 import * as THREE from "three";
 import React, { type JSX } from "react";
 import { useGLTF } from "@react-three/drei";
+import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { GLTF } from "three-stdlib";
 
 type GLTFResult = GLTF & {
@@ -24,12 +25,27 @@ export function TraidarLogoModel(props: JSX.IntrinsicElements["group"]) {
     "/3dModels/TraidarLogo-transformed.glb"
   ) as unknown as GLTFResult;
   return (
-    <group {...props} dispose={null} scale={10}>
+    <group {...props} dispose={null} scale={0.1}>
       <mesh
         geometry={nodes.model.geometry}
         material={materials.CustomMaterial}
-        rotation={[Math.PI / 2, 0, 0]}
-      />
+        rotation={[0, Math.PI * 0.5, 0]}
+        position={[0, 0, 0]}
+        scale={[1, 1, 1]}
+      >
+        <meshStandardMaterial
+          emissive="#ffffff"
+          emissiveIntensity={4}
+          toneMapped={false}
+        />
+      </mesh>
+      <EffectComposer>
+        <Bloom 
+          intensity={1.0}
+          luminanceThreshold={0.2}
+          luminanceSmoothing={0.3}
+        />
+      </EffectComposer>
     </group>
   );
 }
