@@ -1,0 +1,23 @@
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: max-content;
+}
+
+.logo {
+  width: 2rem;
+  height: 100%;
+}
+
+.logoText {
+  font-size: 2rem;
+}
+
+.white {
+  color: white;
+}
+
+.blue {
+  color: #3e83fb;
+}
