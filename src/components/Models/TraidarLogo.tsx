@@ -25,17 +25,17 @@ export function TraidarLogoModel(props: JSX.IntrinsicElements["group"]) {
     "/3dModels/TraidarLogo-transformed.glb"
   ) as unknown as GLTFResult;
   return (
-    <group {...props} dispose={null} scale={0.1}>
+    <group {...props} dispose={null} scale={2} rotation={[0, Math.PI * -1, Math.PI * -0.5]}>
       <mesh
         geometry={nodes.model.geometry}
         material={materials.CustomMaterial}
         rotation={[0, Math.PI * 0.5, 0]}
-        position={[0, 0, 0]}
+        position={[1, 0, 0]}
         scale={[1, 1, 1]}
       >
         <meshStandardMaterial
           emissive="#ffffff"
-          emissiveIntensity={4}
+          emissiveIntensity={0.5}
           toneMapped={false}
         />
       </mesh>
