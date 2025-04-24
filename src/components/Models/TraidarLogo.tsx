@@ -5,10 +5,15 @@ Files: ./public/3dModels/TraidarLogo.glb [1.79MB] > C:\Users\muzik\Documents\tra
 */
 
 import * as THREE from "three";
-import React, { type JSX } from "react";
-import { useGLTF } from "@react-three/drei";
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
+import React, { type JSX, useRef, useState } from "react";
+import { useGLTF, Text3D, Center, Environment } from "@react-three/drei";
+import {
+  EffectComposer,
+  Bloom,
+  ChromaticAberration,
+} from "@react-three/postprocessing";
 import { GLTF } from "three-stdlib";
+import { useFrame } from "@react-three/fiber";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -24,29 +29,68 @@ export function TraidarLogoModel(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF(
     "/3dModels/TraidarLogo-transformed.glb"
   ) as unknown as GLTFResult;
+
+  const groupRef = useRef<THREE.Group>(null);
+  const materialRef = useRef<THREE.MeshStandardMaterial>(null);
+
+  // Use the useFrame hook just for rotation
+  useFrame((state, delta) => {
+    if (groupRef.current) {
+      groupRef.current.rotation.y += delta * 0.1;
+    }
+  });
+
   return (
-    <group {...props} dispose={null} scale={2} rotation={[0, Math.PI * -1, Math.PI * -0.5]}>
-      <mesh
-        geometry={nodes.model.geometry}
-        material={materials.CustomMaterial}
-        rotation={[0, Math.PI * 0.5, 0]}
-        position={[1, 0, 0]}
-        scale={[1, 1, 1]}
+    <>
+      <Environment preset="warehouse" />
+      <group
+        {...props}
+        ref={groupRef}
+        dispose={null}
+        scale={1}
+        rotation={[0, Math.PI * -1, Math.PI * -0.5]}
       >
-        <meshStandardMaterial
-          emissive="#ffffff"
-          emissiveIntensity={0.5}
-          toneMapped={false}
+        {/* Add backlight */}
+        <pointLight
+          position={[-2, 0, -2]}
+          intensity={2}
+          color="#ffffff"
+          distance={5}
         />
-      </mesh>
-      <EffectComposer>
-        <Bloom 
-          intensity={1.0}
-          luminanceThreshold={0.2}
-          luminanceSmoothing={0.3}
-        />
-      </EffectComposer>
-    </group>
+
+        <mesh
+          geometry={nodes.model.geometry}
+          material={materials.CustomMaterial}
+          rotation={[0, Math.PI * 0.5, 0]}
+          position={[1, 0, 0]}
+          scale={[1, 1, 1]}
+        >
+          <meshStandardMaterial
+            ref={materialRef}
+            color="#ffffff"
+            toneMapped={false}
+            metalness={1}
+            roughness={0.1}
+            envMapIntensity={2}
+          />
+        </mesh>
+
+        <EffectComposer>
+          <Bloom
+            intensity={0.3}
+            luminanceThreshold={0.8}
+            luminanceSmoothing={0.5}
+            mipmapBlur
+            radius={0.8}
+          />
+          <ChromaticAberration
+            offset={[0.001, 0.001]}
+            radialModulation={true}
+            modulationOffset={0.5}
+          />
+        </EffectComposer>
+      </group>
+    </>
   );
 }
 

@@ -119,7 +119,9 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     }
 
     float colorVal = 1.0 - line_strength;
-    fragColor = vec4(uColor * colorVal, colorVal);
+    // Normalize color values to 0-1 range
+    vec3 normalizedColor = uColor / 255.0;
+    fragColor = vec4(normalizedColor * colorVal, colorVal);
 }
 
 void main() {
@@ -149,6 +151,14 @@ const Threads: React.FC<ThreadsProps> = ({
     container.appendChild(gl.canvas);
 
     const geometry = new Triangle(gl);
+
+    // Normalize color values if they're in 0-255 range
+    const normalizedColor = color.map((c) => (c > 1 ? c / 255 : c)) as [
+      number,
+      number,
+      number
+    ];
+
     const program = new Program(gl, {
       vertex: vertexShader,
       fragment: fragmentShader,
@@ -167,6 +177,8 @@ const Threads: React.FC<ThreadsProps> = ({
         uMouse: { value: new Float32Array([0.5, 0.5]) },
       },
     });
+
+    console.log("Color passed to shader:", color);
 
     const mesh = new Mesh(gl, { geometry, program });
 
