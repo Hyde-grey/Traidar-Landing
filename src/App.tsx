@@ -12,7 +12,7 @@ function App() {
       <div className="threadsContainer">
         <Threads
           color={[255, 255, 255]}
-          amplitude={2}
+          amplitude={1}
           distance={0.3}
           enableMouseInteraction={false}
         />
@@ -20,8 +20,8 @@ function App() {
       <div className="threadsContainer2">
         <Threads
           color={[255, 255, 255]}
-          amplitude={2}
-          distance={0.3}
+          amplitude={1}
+          distance={0.7}
           enableMouseInteraction={false}
         />
       </div>
