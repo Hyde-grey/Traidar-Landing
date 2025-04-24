@@ -5,8 +5,8 @@ Files: ./public/3dModels/TraidarLogo.glb [1.79MB] > C:\Users\muzik\Documents\tra
 */
 
 import * as THREE from "three";
-import React, { type JSX, useRef, useState } from "react";
-import { useGLTF, Text3D, Center, Environment } from "@react-three/drei";
+import React, { type JSX, useRef } from "react";
+import { useGLTF, Environment } from "@react-three/drei";
 import {
   EffectComposer,
   Bloom,
@@ -22,7 +22,6 @@ type GLTFResult = GLTF & {
   materials: {
     CustomMaterial: THREE.MeshStandardMaterial;
   };
-  animations: THREE.AnimationClip[];
 };
 
 export function TraidarLogoModel(props: JSX.IntrinsicElements["group"]) {
@@ -33,7 +32,6 @@ export function TraidarLogoModel(props: JSX.IntrinsicElements["group"]) {
   const groupRef = useRef<THREE.Group>(null);
   const materialRef = useRef<THREE.MeshStandardMaterial>(null);
 
-  // Use the useFrame hook just for rotation
   useFrame((state, delta) => {
     if (groupRef.current) {
       groupRef.current.rotation.y += delta * 0.1;
@@ -50,7 +48,6 @@ export function TraidarLogoModel(props: JSX.IntrinsicElements["group"]) {
         scale={1}
         rotation={[0, Math.PI * -1, Math.PI * -0.5]}
       >
-        {/* Add backlight */}
         <pointLight
           position={[-2, 0, -2]}
           intensity={2}
