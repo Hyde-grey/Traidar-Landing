@@ -9,9 +9,7 @@ const Logo = () => {
         src={traidarLogo}
         alt="traidarLogo"
       />
-      <p className={styles.logoText}>
-        Tr<span className={styles.blue}>ai</span>dar
-      </p>
+      <p className={styles.logoText}>Traidar</p>
     </div>
   );
 };
