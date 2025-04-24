@@ -5,7 +5,7 @@ Files: ./public/3dModels/TraidarLogo.glb [1.79MB] > C:\Users\muzik\Documents\tra
 */
 
 import * as THREE from "three";
-import React, { type JSX, useRef } from "react";
+import { useRef, type JSX } from "react";
 import { useGLTF, Environment } from "@react-three/drei";
 import {
   EffectComposer,
@@ -32,7 +32,7 @@ export function TraidarLogoModel(props: JSX.IntrinsicElements["group"]) {
   const groupRef = useRef<THREE.Group>(null);
   const materialRef = useRef<THREE.MeshStandardMaterial>(null);
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     if (groupRef.current) {
       groupRef.current.rotation.y += delta * 0.1;
     }

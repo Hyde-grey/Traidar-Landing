@@ -2,7 +2,7 @@ import Logo from "./components/Logo/Logo";
 import Threads from "./components/Motion/Threads/Threads";
 import { TraidarLogoModel } from "./components/Models/TraidarLogo";
 import { Canvas } from "@react-three/fiber";
-import { Float, Html } from "@react-three/drei";
+import { Float } from "@react-three/drei";
 import "./App.css";
 
 function App() {

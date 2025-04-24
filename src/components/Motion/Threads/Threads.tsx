@@ -152,13 +152,6 @@ const Threads: React.FC<ThreadsProps> = ({
 
     const geometry = new Triangle(gl);
 
-    // Normalize color values if they're in 0-255 range
-    const normalizedColor = color.map((c) => (c > 1 ? c / 255 : c)) as [
-      number,
-      number,
-      number
-    ];
-
     const program = new Program(gl, {
       vertex: vertexShader,
       fragment: fragmentShader,
