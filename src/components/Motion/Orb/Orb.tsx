@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { Renderer, Program, Mesh, Triangle, Vec3 } from "ogl";
+import { Renderer, Program, Mesh, Triangle } from "ogl";
+// @ts-ignore
+import { Vec3 } from "ogl";
 
 import "./Orb.css";
 
