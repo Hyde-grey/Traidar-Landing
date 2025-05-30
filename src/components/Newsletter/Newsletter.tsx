@@ -1,6 +1,6 @@
 import useSound from "use-sound";
 import MailchimpForm from "../MailchimpForm/MailchimpForm";
-import styles from "./newsletter.module.css";
+import styles from "./Newsletter.module.css";
 
 import TraidarStart from "../../assets/AUDIO/TraidarStart.mp3";
 
