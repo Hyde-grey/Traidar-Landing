@@ -1,10 +1,11 @@
 import traidarLogo from "../../assets/IMG/Traidar_Logo_orange.png";
 import styles from "./Logo.module.css";
-import GradientText from "../GradientText/gradientText";
+
 import useSound from "use-sound";
 import TraidarStart from "../../assets/AUDIO/TraidarStart.mp3";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect } from "react";
+import MailchimpForm from "../MailchimpForm/MailchimpForm";
 
 const Logo = ({
   forceHoverState,
@@ -49,20 +50,9 @@ const Logo = ({
               setForceHoverState(true);
             }}
           >
-            <GradientText
-              colors={[
-                "var(--color-primary)",
-                "var(--color-light-1)",
-                "var(--color-primary)",
-                "var(--color-light-2)",
-                "var(--color-primary)",
-              ]}
-              animationSpeed={3}
-              showBorder={true}
-              className={styles.soon}
-            >
-              Launching Soon...
-            </GradientText>
+            <div className={styles.soonContainer}>
+              <MailchimpForm setForceHoverState={setForceHoverState} />
+            </div>
           </div>
         </motion.div>
       </AnimatePresence>
