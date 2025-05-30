@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+
 import { Renderer, Program, Mesh, Triangle } from "ogl";
 // @ts-ignore
 import { Vec3 } from "ogl";
@@ -188,7 +189,7 @@ export default function Orb({
       alpha: true,
       premultipliedAlpha: false,
       antialias: true,
-    });
+    } as any);
     const gl = renderer.gl;
 
     gl.canvas.style.opacity = "0";
