@@ -16,7 +16,7 @@
   font-size: 3rem;
 }
 
-@media (max-width: 1700px) {
+@media (max-width: 768px) {
   .logoContainer {
     margin-left: 2rem;
     margin-top: 2rem;
