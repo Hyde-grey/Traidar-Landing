@@ -1,0 +1,37 @@
+.launchingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  max-width: fit-content;
+  border-radius: 9999px;
+  border: 1px solid #333333;
+}
+
+.launchingIndicator {
+  width: 1rem;
+  height: 1rem;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+}
+
+.launchingText {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+@media (max-width: 1024px) {
+  .launchingContainer {
+    padding: 0rem 1rem;
+  }
+
+  .launchingIndicator {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+
+  .launchingText {
+    font-size: 0.8rem;
+  }
+}

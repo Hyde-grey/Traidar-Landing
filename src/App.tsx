@@ -1,23 +1,25 @@
-import Logo from "./components/Logo/Logo";
+import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
 
+import Logo from "./components/Logo/Logo";
+import Title from "./components/Title/Title";
 import Orb from "./components/Motion/Orb/Orb";
 
 import "./App.css";
-import { useState } from "react";
 
 function App() {
   const [forceHoverState, setForceHoverState] = useState(false);
   return (
-    <div className="appContainer">
-      <Logo
-        forceHoverState={forceHoverState}
-        setForceHoverState={setForceHoverState}
-      />
+    <AnimatePresence mode="wait">
+      <div className="appContainer">
+        <Logo />
+        <Title setForceHoverState={setForceHoverState} />
 
-      <div className="mainCanvas">
-        <Orb forceHoverState={forceHoverState} />
+        <div className="mainCanvas">
+          <Orb forceHoverState={forceHoverState} />
+        </div>
       </div>
-    </div>
+    </AnimatePresence>
   );
 }
 

@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 :root {
-  font-family: "Manrope", sans-serif;
+  font-family: "Geist", sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -79,9 +79,7 @@ body {
 .appContainer {
   width: 100%;
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  position: relative;
 }
 
 .mainCanvas {
@@ -89,7 +87,7 @@ body {
   height: 100vh;
   position: absolute;
   top: 0%;
-  left: 15%;
+  left: 13%;
   opacity: 1;
   z-index: -1;
 }

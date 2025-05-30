@@ -1,61 +1,22 @@
-import traidarLogo from "../../assets/IMG/Traidar_Logo_orange.png";
+import traidarLogo from "../../assets/IMG/Traidar.svg";
 import styles from "./Logo.module.css";
 
-import useSound from "use-sound";
-import TraidarStart from "../../assets/AUDIO/TraidarStart.mp3";
-import { AnimatePresence, motion } from "framer-motion";
-import { useEffect } from "react";
-import MailchimpForm from "../MailchimpForm/MailchimpForm";
+import { motion } from "framer-motion";
 
-const Logo = ({
-  forceHoverState,
-  setForceHoverState,
-}: {
-  forceHoverState: boolean;
-  setForceHoverState: (state: boolean) => void;
-}) => {
-  const [play] = useSound(TraidarStart);
-
-  useEffect(() => {
-    if (forceHoverState) {
-      setTimeout(() => {
-        setForceHoverState(false);
-      }, 6000);
-    }
-  }, [forceHoverState]);
-
+const Logo = ({}: {}) => {
   return (
     <>
-      <AnimatePresence mode="wait">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 2 }}
-          className={styles.textContainer}
-        >
-          <div className={styles.logoContainer}>
-            <img
-              className={(styles.white, styles.logo)}
-              src={traidarLogo}
-              alt="traidarLogo"
-            />
-            <p className={styles.logoText}>Traidar</p>
-          </div>
-          <p className={styles.subText}>Every trade sharper with AI</p>
-          <div
-            className={styles.soonContainer}
-            onClick={() => {
-              play();
-              setForceHoverState(true);
-            }}
-          >
-            <div className={styles.soonContainer}>
-              <MailchimpForm setForceHoverState={setForceHoverState} />
-            </div>
-          </div>
-        </motion.div>
-      </AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 2 }}
+        className={styles.logoContainer}
+      >
+        <img className={styles.logo} src={traidarLogo} alt="traidarLogo" />
+
+        <p className={styles.logoText}>Traidar</p>
+      </motion.div>
     </>
   );
 };

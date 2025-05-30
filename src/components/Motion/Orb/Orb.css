@@ -34,3 +34,9 @@
   background-color: black !important;
   z-index: 1;
 }
+
+@media (max-width: 768px) {
+  .orb-container {
+    margin-top: 6rem;
+  }
+}
