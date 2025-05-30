@@ -48,3 +48,16 @@
   cursor: pointer;
   z-index: 999;
 }
+
+@media (max-width: 375px) {
+  .textContainer {
+    width: 100%;
+    left: 0;
+  }
+  .logoContainer {
+    justify-content: center;
+  }
+  .logo {
+    width: 8rem;
+  }
+}

@@ -185,6 +185,7 @@ export default function Orb({
     const container = ctnDom.current;
     if (!container) return;
 
+    // @ts-ignore: include premultipliedAlpha and antialias in options
     const renderer = new Renderer({
       alpha: true,
       premultipliedAlpha: false,
