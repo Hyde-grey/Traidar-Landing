@@ -1,0 +1,87 @@
+/* Star Border Container */
+.star-border-container {
+  --transition: 0.25s;
+  --spark: var(--spark, 6s);
+  --bg: #000;
+  --star-color: var(--star-color, white);
+  position: relative;
+  display: inline-grid;
+  padding: 6px 18px;
+  border-radius: 9999px;
+  overflow: hidden;
+  background: var(--bg);
+  box-shadow: inset 0 1000px 0 0 var(--bg);
+  transition: box-shadow var(--transition), background var(--transition),
+    transform var(--transition);
+}
+
+.star-border-container:hover {
+  transform: scale(1.05);
+}
+
+/* Spark Animation Wrapper */
+.spark__container {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  overflow: hidden;
+  mask: linear-gradient(white, transparent 50%);
+  animation: flip calc(var(--spark) * 2) infinite steps(2, end);
+}
+
+/* Spark Shape */
+.spark__container .spark {
+  position: absolute;
+  inset: 0;
+}
+
+.spark__container .spark:before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  aspect-ratio: 1;
+  inset: 0 auto auto 50%;
+  z-index: -1;
+  transform: translate(-50%, -15%) rotate(-90deg);
+  opacity: 1;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0 340deg,
+    var(--star-color) 360deg
+  );
+  animation: rotate var(--spark) linear infinite both;
+}
+
+/* Backdrop */
+.backdrop {
+  position: absolute;
+  inset: 1px;
+  background: var(--bg);
+  border-radius: 9999px;
+  transition: background var(--transition), opacity var(--transition);
+}
+
+.star-border-container:hover .backdrop {
+  background: rgb(20 20 20);
+}
+
+/* Inner Text */
+.text {
+  position: relative;
+  z-index: 1;
+  color: #cbd5e1;
+  display: inline-block;
+}
+
+/* Keyframes */
+@keyframes flip {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(90deg);
+  }
+}

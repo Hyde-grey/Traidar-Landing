@@ -26,7 +26,7 @@ type GLTFResult = GLTF & {
 
 export function TraidarLogoModel(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF(
-    "/3dModels/TraidarLogo-transformed.glb"
+    "/3dModels/TraidarLogo.glb"
   ) as unknown as GLTFResult;
 
   const groupRef = useRef<THREE.Group>(null);
@@ -91,4 +91,4 @@ export function TraidarLogoModel(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/3dModels/TraidarLogo-transformed.glb");
+useGLTF.preload("/3dModels/TraidarLogo.glb");
