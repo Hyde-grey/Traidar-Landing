@@ -1,4 +1,4 @@
-import traidarLogo from "../../assets/IMG/Traidar_Logo_white.png";
+import traidarLogo from "../../assets/IMG/Traidar_Logo_orange.png";
 import styles from "./Logo.module.css";
 import GradientText from "../GradientText/gradientText";
 import useSound from "use-sound";
