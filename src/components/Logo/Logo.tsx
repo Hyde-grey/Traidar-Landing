@@ -1,18 +1,13 @@
-import traidarLogo from "../../assets/IMG/Traidar_Logo_orange.png";
+import traidarLogo from "../../assets/IMG/Traidar_Logo_white.png";
 import styles from "./Logo.module.css";
 import GradientText from "../GradientText/gradientText";
 import useSound from "use-sound";
 import TraidarStart from "../../assets/AUDIO/TraidarStart.mp3";
-import { motion } from "framer-motion";
 
 const Logo = () => {
   const [play] = useSound(TraidarStart);
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 100 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1 }}
-    >
+    <>
       <div className={styles.textContainer}>
         <div className={styles.logoContainer}>
           <img
@@ -40,7 +35,7 @@ const Logo = () => {
           </GradientText>
         </div>
       </div>
-    </motion.div>
+    </>
   );
 };
 
