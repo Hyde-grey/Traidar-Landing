@@ -1,28 +1,17 @@
-import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
-
-import Logo from "./components/Logo/Logo";
-import Title from "./components/Title/title";
-import Orb from "./components/Motion/Orb/Orb";
+import { Routes, Route } from "react-router-dom";
+import ThankYou from "./pages/ThankYou/ThankYou";
+import Home from "./pages/Home/Home";
 
 import "./App.css";
 
 function App() {
-  const [forceHoverState, setForceHoverState] = useState(false);
-
   return (
     <AnimatePresence mode="wait">
-      <div className="appContainer">
-        <Logo />
-        <Title setForceHoverState={setForceHoverState} />
-      </div>
-      <div className="mainCanvas">
-        <Orb
-          rotateOnHover={true}
-          forceHoverState={forceHoverState}
-          hoverIntensity={0.2}
-        />
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/thank-you" element={<ThankYou />} />
+      </Routes>
     </AnimatePresence>
   );
 }

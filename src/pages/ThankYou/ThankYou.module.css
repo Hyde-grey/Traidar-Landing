@@ -1,0 +1,108 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100dvh;
+  max-width: 100dvw;
+  margin: 0 auto;
+  text-align: center;
+  gap: 2rem;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 4rem;
+}
+
+.subText {
+  font-size: 2.4rem;
+  font-weight: semibold;
+  color: #b3b3b3;
+  background: linear-gradient(
+    to top right,
+    var(--color-light-1) 60%,
+    var(--color-primary) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  user-select: none;
+}
+
+.title {
+  max-width: 40dvw;
+  font-size: 9.6rem;
+  font-weight: 500;
+  line-height: 80px;
+  background: linear-gradient(
+    to top right,
+    var(--color-light-1) 60%,
+    var(--color-primary) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-top: 3.2rem;
+  user-select: none;
+}
+
+.button {
+  margin-top: 3.2rem;
+  width: 200px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+  background: #0c0c0c;
+  border: none;
+  color: #b3b3b3;
+  font-size: 1.8rem;
+  backdrop-filter: blur(10px);
+  padding: 1.8rem 3.6rem;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0px 1.67px 6.82px 0px rgba(245, 144, 58, 1),
+    inset 0px 0px 18.13px 0px rgba(245, 144, 58, 1),
+    inset 0px 0.84px 0.56px 0px rgba(255, 199, 152, 1),
+    inset 0px 1.12px 1.81px 0px rgba(255, 199, 151, 1),
+    inset 0px 1.12px 2.23px 0px rgba(255, 249, 244, 1);
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  opacity: 0.8;
+  background: var(--color-primary);
+  color: var(--color-dark-1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin-top: 2rem;
+    padding: 0 2rem;
+    text-align: center;
+  }
+  .logoContainer {
+    margin-top: 2rem;
+  }
+  .subText {
+    font-size: 1.4rem;
+  }
+
+  .title {
+    font-size: 3.6rem;
+    line-height: 54px;
+  }
+  .button {
+    width: 80%;
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

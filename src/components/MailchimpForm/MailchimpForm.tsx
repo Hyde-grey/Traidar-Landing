@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import useSound from "use-sound";
+import TraidarStart from "../../assets/AUDIO/TraidarStart.mp3";
 import styles from "./MailchimpForm.module.css";
 
 /**
@@ -10,12 +12,17 @@ export default function MailchimpForm({
   setForceHoverState: (state: boolean) => void;
 }) {
   const [email, setEmail] = useState("");
+  // Manual timeout to reset hover state
+  const manualTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // Sound effect for button click
+  const [play] = useSound(TraidarStart, { volume: 0.5 });
+
   return (
     <form
       action="https://traidar.us11.list-manage.com/subscribe/post?u=c5c5a9c5507c7ffa3913a85a9&id=6ceb1b2873"
       method="post"
       className={styles.form}
-      target="_blank"
+      target="_self"
       autoComplete="on"
       noValidate
     >
@@ -32,7 +39,16 @@ export default function MailchimpForm({
       />
       <button
         onClick={() => {
+          play();
           setForceHoverState(true);
+          // Start manual override timeout
+          if (manualTimeoutRef.current) {
+            clearTimeout(manualTimeoutRef.current);
+          }
+          manualTimeoutRef.current = setTimeout(() => {
+            setForceHoverState(false);
+            manualTimeoutRef.current = null;
+          }, 8000);
         }}
         type="submit"
         className={styles.button}

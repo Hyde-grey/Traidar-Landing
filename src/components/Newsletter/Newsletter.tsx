@@ -1,8 +1,6 @@
-import useSound from "use-sound";
 import MailchimpForm from "../MailchimpForm/MailchimpForm";
 import styles from "./Newsletter.module.css";
 
-import TraidarStart from "../../assets/AUDIO/TraidarStart.mp3";
 import { useEffect, useRef } from "react";
 
 const Newsletter = ({
@@ -10,8 +8,6 @@ const Newsletter = ({
 }: {
   setForceHoverState: (state: boolean) => void;
 }) => {
-  const [play] = useSound(TraidarStart);
-
   // Ref to manage manual hover override timeout
   const manualTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -41,21 +37,7 @@ const Newsletter = ({
   }, [setForceHoverState]);
 
   return (
-    <div
-      className={styles.soonContainer}
-      onClick={() => {
-        play();
-        setForceHoverState(true);
-        // Start manual override timeout
-        if (manualTimeoutRef.current) {
-          clearTimeout(manualTimeoutRef.current);
-        }
-        manualTimeoutRef.current = setTimeout(() => {
-          setForceHoverState(false);
-          manualTimeoutRef.current = null;
-        }, 8000);
-      }}
-    >
+    <div className={styles.soonContainer}>
       <MailchimpForm setForceHoverState={setForceHoverState} />
     </div>
   );
