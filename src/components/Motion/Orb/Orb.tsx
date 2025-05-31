@@ -21,6 +21,7 @@ export default function Orb({
 }: OrbProps) {
   const ctnDom = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const forceHoverRef = useRef(forceHoverState);
 
   const vert = /* glsl */ `
     precision highp float;
@@ -282,7 +283,7 @@ export default function Orb({
       program.uniforms.hue.value = hue;
       program.uniforms.hoverIntensity.value = hoverIntensity;
 
-      const effectiveHover = forceHoverState ? 1 : targetHover;
+      const effectiveHover = forceHoverRef.current ? 1 : targetHover;
       program.uniforms.hover.value +=
         (effectiveHover - program.uniforms.hover.value) * 0.1;
 
@@ -315,7 +316,11 @@ export default function Orb({
       }
       gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
-  }, [hue, hoverIntensity, rotateOnHover, forceHoverState]);
+  }, [hue, hoverIntensity, rotateOnHover]);
+
+  useEffect(() => {
+    forceHoverRef.current = forceHoverState;
+  }, [forceHoverState]);
 
   return (
     <>

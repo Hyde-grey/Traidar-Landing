@@ -9,6 +9,7 @@ import "./App.css";
 
 function App() {
   const [forceHoverState, setForceHoverState] = useState(false);
+
   return (
     <AnimatePresence mode="wait">
       <div className="appContainer">
@@ -16,7 +17,11 @@ function App() {
         <Title setForceHoverState={setForceHoverState} />
       </div>
       <div className="mainCanvas">
-        <Orb forceHoverState={forceHoverState} />
+        <Orb
+          rotateOnHover={true}
+          forceHoverState={forceHoverState}
+          hoverIntensity={0.2}
+        />
       </div>
     </AnimatePresence>
   );
