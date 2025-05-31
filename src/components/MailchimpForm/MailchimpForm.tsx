@@ -16,11 +16,14 @@ export default function MailchimpForm({
       method="post"
       className={styles.form}
       target="_blank"
+      autoComplete="on"
       noValidate
     >
       <input
         type="email"
         name="EMAIL"
+        id="email"
+        autoComplete="email"
         placeholder="Enter your email"
         required
         value={email}
