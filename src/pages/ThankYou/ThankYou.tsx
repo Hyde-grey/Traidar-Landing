@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "./ThankYou.module.css";
 import Logo from "../../assets/IMG/Traidar.svg";
 import { motion } from "framer-motion";
-
+import Orb from "../../components/Motion/Orb/Orb";
 export default function ThankYou() {
   return (
     <motion.div
@@ -22,6 +22,7 @@ export default function ThankYou() {
           Go back home
         </Link>
       </div>
+      <Orb />
     </motion.div>
   );
 }

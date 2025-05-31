@@ -83,26 +83,31 @@
 
 @media (max-width: 768px) {
   .container {
-    margin-top: 2rem;
-    padding: 0 2rem;
     text-align: center;
+    height: auto;
+    min-height: 100vh;
+    justify-content: center;
   }
   .logoContainer {
     margin-top: 2rem;
   }
   .subText {
     font-size: 1.4rem;
+    margin-bottom: 1rem;
   }
-
   .title {
     font-size: 3.6rem;
-    line-height: 54px;
+    line-height: 1.2;
+    max-width: 80%;
+    margin: 0 auto;
   }
   .button {
     width: 80%;
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
+    max-width: 250px;
+    position: static;
+    margin: 3.2rem auto 0;
+    transform: none;
+    font-size: 1.2rem;
+    padding: 1.2rem 2rem;
   }
 }
