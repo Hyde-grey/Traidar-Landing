@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import useSound from "use-sound";
 import TraidarStart from "../../assets/AUDIO/TraidarStart.mp3";
 import styles from "./MailchimpForm.module.css";
+import { useNavigate } from "react-router-dom";
 
 /**
  * Mailchimp embedded form styled as glassmorphic bar with rounded sides
@@ -14,15 +15,37 @@ export default function MailchimpForm({
   const [email, setEmail] = useState("");
   // Manual timeout to reset hover state
   const manualTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  // Sound effect for button click
-  const [play] = useSound(TraidarStart, { volume: 0.5 });
+  // Sound effect for button click; clear hover when audio ends
+  const [play] = useSound(TraidarStart, {
+    volume: 0.5,
+    onend: () => {
+      setForceHoverState(false);
+    },
+  });
+  const navigate = useNavigate();
+
+  /** Handle form submission manually to navigate after sending */
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    fetch(form.action, {
+      method: form.method,
+      body: new FormData(form),
+      mode: "no-cors",
+    }).finally(() => {
+      // Wait 3 seconds before navigating to the thank-you page
+      setTimeout(() => {
+        navigate("/thank-you");
+      }, 3000);
+    });
+  }
 
   return (
     <form
+      onSubmit={handleSubmit}
       action="https://traidar.us11.list-manage.com/subscribe/post?u=c5c5a9c5507c7ffa3913a85a9&id=6ceb1b2873"
       method="post"
       className={styles.form}
-      target="_self"
       autoComplete="on"
       noValidate
     >
