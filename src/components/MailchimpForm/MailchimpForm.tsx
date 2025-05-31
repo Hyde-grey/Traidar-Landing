@@ -17,6 +17,7 @@ export default function MailchimpForm({
   const manualTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   // Sound effect for button click; clear hover when audio ends
   const [play] = useSound(TraidarStart, {
+    html5: true,
     volume: 0.5,
     onend: () => {
       setForceHoverState(false);
