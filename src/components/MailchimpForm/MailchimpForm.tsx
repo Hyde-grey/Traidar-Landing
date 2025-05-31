@@ -27,6 +27,7 @@ export default function MailchimpForm({
   /** Handle form submission manually to play sound, set hover, and navigate after sending */
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    console.log("📝 handleSubmit fired");
     // Play sound and force hover state
     play();
     setForceHoverState(true);
