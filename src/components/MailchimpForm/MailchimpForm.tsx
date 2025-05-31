@@ -24,16 +24,27 @@ export default function MailchimpForm({
   });
   const navigate = useNavigate();
 
-  /** Handle form submission manually to navigate after sending */
+  /** Handle form submission manually to play sound, set hover, and navigate after sending */
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    // Play sound and force hover state
+    play();
+    setForceHoverState(true);
+    // Clear any existing manual timeout
+    if (manualTimeoutRef.current) {
+      clearTimeout(manualTimeoutRef.current);
+    }
+    // Reset hover state after sound duration or fallback delay
+    manualTimeoutRef.current = setTimeout(() => {
+      setForceHoverState(false);
+      manualTimeoutRef.current = null;
+    }, 8000);
     const form = e.currentTarget;
     fetch(form.action, {
       method: form.method,
       body: new FormData(form),
       mode: "no-cors",
     }).finally(() => {
-      // Wait 3 seconds before navigating to the thank-you page
       setTimeout(() => {
         navigate("/thank-you");
       }, 3000);
@@ -60,22 +71,7 @@ export default function MailchimpForm({
         onChange={(e) => setEmail(e.target.value)}
         className={styles.input}
       />
-      <button
-        onClick={() => {
-          play();
-          setForceHoverState(true);
-          // Start manual override timeout
-          if (manualTimeoutRef.current) {
-            clearTimeout(manualTimeoutRef.current);
-          }
-          manualTimeoutRef.current = setTimeout(() => {
-            setForceHoverState(false);
-            manualTimeoutRef.current = null;
-          }, 8000);
-        }}
-        type="submit"
-        className={styles.button}
-      >
+      <button type="submit" className={styles.button}>
         Join Waitlist
       </button>
       {/* Honeypot field for bots */}
