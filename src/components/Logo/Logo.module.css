@@ -3,24 +3,18 @@
   align-items: center;
   justify-content: flex-start;
   gap: 1.5rem;
-  margin-top: 6rem;
-  margin-left: 8rem;
 }
 
 .logo {
-  width: 3rem;
+  width: 4rem;
   height: 100%;
 }
 
 .logoText {
-  font-size: 3rem;
+  font-size: 2.8rem;
 }
 
 @media (max-width: 768px) {
-  .logoContainer {
-    margin-left: 2rem;
-    margin-top: 2rem;
-  }
   .logo {
     width: 2rem;
   }

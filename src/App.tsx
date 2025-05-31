@@ -14,10 +14,9 @@ function App() {
       <div className="appContainer">
         <Logo />
         <Title setForceHoverState={setForceHoverState} />
-
-        <div className="mainCanvas">
-          <Orb forceHoverState={forceHoverState} />
-        </div>
+      </div>
+      <div className="mainCanvas">
+        <Orb forceHoverState={forceHoverState} />
       </div>
     </AnimatePresence>
   );
