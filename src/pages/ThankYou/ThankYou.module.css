@@ -84,9 +84,8 @@
 @media (max-width: 768px) {
   .container {
     text-align: center;
-    height: auto;
-    min-height: 100vh;
     justify-content: center;
+    height: calc(100svh - 40px);
   }
   .logoContainer {
     margin-top: 2rem;
