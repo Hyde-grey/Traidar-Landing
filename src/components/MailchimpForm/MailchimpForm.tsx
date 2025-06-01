@@ -13,6 +13,7 @@ export default function MailchimpForm({
   setForceHoverState: (state: boolean) => void;
 }) {
   const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   // Manual timeout to reset hover state
   const manualTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   // Sound effect for button click; clear hover when audio ends
@@ -28,6 +29,7 @@ export default function MailchimpForm({
   /** Handle form submission manually to play sound, set hover, and navigate after sending */
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setIsSubmitting(true);
     console.log("📝 handleSubmit fired");
     // Play sound and force hover state
     play();
@@ -36,9 +38,10 @@ export default function MailchimpForm({
     if (manualTimeoutRef.current) {
       clearTimeout(manualTimeoutRef.current);
     }
-    // Reset hover state after sound duration or fallback delay
+    // Reset hover state and submitting flag after sound duration or fallback delay
     manualTimeoutRef.current = setTimeout(() => {
       setForceHoverState(false);
+      setIsSubmitting(false);
       manualTimeoutRef.current = null;
     }, 8000);
     const form = e.currentTarget;
@@ -73,8 +76,8 @@ export default function MailchimpForm({
         onChange={(e) => setEmail(e.target.value)}
         className={styles.input}
       />
-      <button type="submit" className={styles.button}>
-        Join Waitlist
+      <button type="submit" className={styles.button} disabled={isSubmitting}>
+        {isSubmitting ? "Joining..." : "Join Waitlist"}
       </button>
       {/* Honeypot field for bots */}
       <div aria-hidden="true" className={styles.hiddenField}>
