@@ -33,10 +33,12 @@
 }
 
 .title {
-  max-width: 40dvw;
-  font-size: 9.6rem;
+  /* Fluid font sizing with viewport units for responsiveness */
+  max-width: 90vw;
+  font-size: clamp(4.5rem, 6vw, 9.6rem);
   font-weight: 500;
-  line-height: 80px;
+  /* Use unitless line-height relative to font-size */
+  line-height: 1.1;
   background: linear-gradient(
     to top right,
     var(--color-light-1) 60%,
@@ -97,9 +99,10 @@
     margin-bottom: 1rem;
   }
   .title {
-    font-size: 3.6rem;
+    /* Smaller clamp range for mobile */
+    max-width: 80vw;
+    font-size: clamp(2.4rem, 8vw, 4.5rem);
     line-height: 1.2;
-    max-width: 80%;
     margin: 0 auto;
     padding-bottom: 0;
   }
@@ -148,4 +151,10 @@
     rgba(0, 0, 0, 0.5) 100%
   );
   opacity: 0.5;
+}
+
+@media (min-width: 1024px) {
+  .breakLg {
+    display: block;
+  }
 }

@@ -22,7 +22,11 @@ export default function ThankYou() {
         <div className={styles.container}>
           <p className={styles.subText}>You're on the list!</p>
 
-          <h1 className={styles.title}>We look forward to seeing you soon.</h1>
+          <h1 className={styles.title}>
+            We look forward to
+            <br className={styles.breakLg} />
+            seeing you soon.
+          </h1>
 
           <Link className={styles.button} to="/">
             Go back home
