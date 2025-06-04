@@ -158,3 +158,13 @@
     display: block;
   }
 }
+
+.pillContainer {
+  position: fixed;
+  bottom: 10%;
+  right: 10%;
+  width: 20vmin;
+  height: 20vmin;
+  z-index: -1;
+  pointer-events: none;
+}

@@ -3,6 +3,17 @@ import useSound from "use-sound";
 import TraidarStart from "../../assets/AUDIO/TraidarStart.mp3";
 import styles from "./MailchimpForm.module.css";
 import { useNavigate } from "react-router-dom";
+import { useSoundContext } from "../../context/SoundContext";
+
+/**
+ * Validates if the input string is a valid email address
+ * @param email - The email string to validate
+ * @returns boolean indicating if the email is valid
+ */
+function isValidEmail(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
 
 /**
  * Mailchimp embedded form styled as glassmorphic bar with rounded sides
@@ -14,6 +25,7 @@ export default function MailchimpForm({
 }) {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { isAmbientPlaying, handleSoundComplete } = useSoundContext();
   // Manual timeout to reset hover state
   const manualTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   // Sound effect for button click; clear hover when audio ends
@@ -22,6 +34,7 @@ export default function MailchimpForm({
     volume: 0.5,
     onend: () => {
       setForceHoverState(false);
+      handleSoundComplete();
     },
   });
   const navigate = useNavigate();
@@ -29,10 +42,14 @@ export default function MailchimpForm({
   /** Handle form submission manually to play sound, set hover, and navigate after sending */
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (!isValidEmail(email)) return;
+
     setIsSubmitting(true);
     console.log("📝 handleSubmit fired");
-    // Play sound and force hover state
-    play();
+    // Only play sound if ambient sound is not playing
+    if (!isAmbientPlaying) {
+      play();
+    }
     setForceHoverState(true);
     // Clear any existing manual timeout
     if (manualTimeoutRef.current) {
@@ -76,7 +93,11 @@ export default function MailchimpForm({
         onChange={(e) => setEmail(e.target.value)}
         className={styles.input}
       />
-      <button type="submit" className={styles.button} disabled={isSubmitting}>
+      <button
+        type="submit"
+        className={styles.button}
+        disabled={isSubmitting || !isValidEmail(email)}
+      >
         {isSubmitting ? "Joining..." : "Join Waitlist"}
       </button>
       {/* Honeypot field for bots */}

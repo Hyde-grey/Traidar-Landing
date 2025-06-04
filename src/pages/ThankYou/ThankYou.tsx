@@ -1,11 +1,27 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./ThankYou.module.css";
 import Logo from "../../assets/IMG/Traidar.svg";
 import { motion } from "framer-motion";
 import { Canvas } from "@react-three/fiber";
 import { Stars } from "../../components/Stars/Stars";
+import { useSoundContext } from "../../context/SoundContext";
+import useSound from "use-sound";
+import sound from "../../assets/AUDIO/Ambienttraidar.mp3";
 
 export default function ThankYou() {
+  const navigate = useNavigate();
+  const { setIsAmbientPlaying } = useSoundContext();
+  const [playSound] = useSound(sound, {
+    volume: 0.3,
+    loop: false,
+  });
+
+  const handleGoBack = () => {
+    navigate("/Home");
+    playSound();
+    setIsAmbientPlaying(true);
+  };
+
   return (
     <>
       {/* Vignette overlay outside motion for immediate effect */}
@@ -28,9 +44,9 @@ export default function ThankYou() {
             seeing you soon.
           </h1>
 
-          <Link className={styles.button} to="/">
+          <button className={styles.button} onClick={handleGoBack}>
             Go back home
-          </Link>
+          </button>
         </div>
         <Canvas
           id="canvas"

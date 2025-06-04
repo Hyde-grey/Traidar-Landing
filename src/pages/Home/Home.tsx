@@ -3,6 +3,9 @@ import Title from "../../components/Title/title";
 import Orb from "../../components/Motion/Orb/Orb";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { TraidarLaptop } from "../../components/Models/TraidarLaptop";
+import { Canvas } from "@react-three/fiber";
+import { Float, PerspectiveCamera } from "@react-three/drei";
 
 const Home = () => {
   const [forceHoverState, setForceHoverState] = useState(false);
@@ -29,6 +32,32 @@ const Home = () => {
           hoverIntensity={0.2}
         />
       </motion.div>
+      <Canvas
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          zIndex: -1,
+        }}
+      >
+        <PerspectiveCamera makeDefault position={[0, 0, 10]} fov={45} />
+        {/* Ambient and fill lights */}
+        <ambientLight intensity={0.2} />
+        <hemisphereLight args={["#ffffff", "#000000", 0.3]} />
+        {/* Orange rim/back light from right side */}
+        <directionalLight color="#f38439" position={[5, 1, -5]} intensity={3} />
+        {/* White key light for front illumination */}
+        <directionalLight
+          color="#ffffff"
+          position={[-5, 2, 5]}
+          intensity={10}
+        />
+        <Float>
+          <TraidarLaptop />
+        </Float>
+      </Canvas>
     </motion.div>
   );
 };

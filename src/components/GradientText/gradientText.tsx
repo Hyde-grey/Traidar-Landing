@@ -1,4 +1,4 @@
-import "./gradientText.css";
+import "./GradientText.css";
 import type { ReactNode } from "react";
 
 interface GradientTextProps {
