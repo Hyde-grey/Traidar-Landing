@@ -4,7 +4,7 @@ import useSound from "use-sound";
 import sound from "../../assets/AUDIO/Ambienttraidar.mp3";
 import { useSoundContext } from "../../context/SoundContext";
 
-import GradientText from "../../components/GradientText/gradientText";
+import GradientText from "../../components/GradientText/GradientText";
 import { AnimatePresence, motion } from "framer-motion";
 
 const Enter = () => {
