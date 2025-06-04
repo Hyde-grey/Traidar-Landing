@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 import styles from "./LaunchingSoon.module.css";
-import GradientText from "../GradientText/GradientText";
+import GradientText from "../GradientText/gradientText";
 const LaunchingSoon = () => {
   return (
     <div className={styles.launchingContainer}>
