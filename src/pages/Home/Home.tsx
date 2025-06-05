@@ -5,7 +5,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { TraidarLaptop } from "../../components/Models/TraidarLaptop";
 import { Canvas } from "@react-three/fiber";
-import { Float, PerspectiveCamera } from "@react-three/drei";
+import { Float, PerspectiveCamera, OrbitControls } from "@react-three/drei";
 import styles from "./Home.module.css";
 const Home = () => {
   const [forceHoverState, setForceHoverState] = useState(false);
@@ -49,6 +49,20 @@ const Home = () => {
             zIndex: -1,
           }}
         >
+          <OrbitControls
+            enableZoom={true}
+            enablePan={true}
+            enableRotate={true}
+            minPolarAngle={Math.PI / 4}
+            maxPolarAngle={Math.PI / 1.5}
+            minDistance={5}
+            maxDistance={15}
+            enableDamping={true}
+            dampingFactor={0.05}
+            rotateSpeed={0.5}
+            zoomSpeed={0.5}
+            panSpeed={0.5}
+          />
           <PerspectiveCamera makeDefault position={[0, 0, 10]} fov={45} />
           {/* Ambient and fill lights */}
           <ambientLight intensity={0.2} />

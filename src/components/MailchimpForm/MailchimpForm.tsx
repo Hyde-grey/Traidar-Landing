@@ -60,7 +60,7 @@ export default function MailchimpForm({
       setForceHoverState(false);
       setIsSubmitting(false);
       manualTimeoutRef.current = null;
-    }, 5000);
+    }, 0);
     const form = e.currentTarget;
     fetch(form.action, {
       method: form.method,
@@ -69,7 +69,7 @@ export default function MailchimpForm({
     }).finally(() => {
       setTimeout(() => {
         navigate("/thank-you");
-      }, 100);
+      }, 0);
     });
   }
 

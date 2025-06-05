@@ -35,19 +35,27 @@ export default function ThankYou() {
         <div className={styles.logoContainer}>
           <img src={Logo} alt="Traidar Logo" />
         </div>
-        <div className={styles.container}>
-          <p className={styles.subText}>You're on the list!</p>
+        <motion.div
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -100 }}
+          transition={{ duration: 1, delay: 1.5 }}
+        >
+          <div className={styles.container}>
+            <p className={styles.subText}>You're on the list!</p>
 
-          <h1 className={styles.title}>
-            We look forward to
-            <br className={styles.breakLg} />
-            seeing you soon.
-          </h1>
+            <h1 className={styles.title}>
+              We look forward to
+              <br className={styles.breakLg} />
+              seeing you soon.
+            </h1>
 
-          <button className={styles.button} onClick={handleGoBack}>
-            Go back home
-          </button>
-        </div>
+            <button className={styles.button} onClick={handleGoBack}>
+              Go back home
+            </button>
+          </div>
+        </motion.div>
+
         <Canvas
           id="canvas"
           camera={{ position: [0, 0, 5], fov: 75 }}
