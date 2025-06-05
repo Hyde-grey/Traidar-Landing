@@ -2,8 +2,10 @@ import traidarLogo from "../../assets/IMG/Traidar.svg";
 import styles from "./Logo.module.css";
 
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
-const Logo = ({}: {}) => {
+const Logo = () => {
+  const navigate = useNavigate();
   return (
     <>
       <motion.div
@@ -12,6 +14,7 @@ const Logo = ({}: {}) => {
         exit={{ opacity: 0 }}
         transition={{ duration: 2 }}
         className={styles.logoContainer}
+        onClick={() => navigate("/")}
       >
         <img className={styles.logo} src={traidarLogo} alt="traidarLogo" />
 

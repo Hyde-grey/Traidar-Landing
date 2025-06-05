@@ -5,7 +5,7 @@ import sound from "../../assets/AUDIO/Ambienttraidar.mp3";
 import { useSoundContext } from "../../context/SoundContext";
 
 import GradientText from "../../components/GradientText/GradientText";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 const Enter = () => {
   const navigate = useNavigate();
@@ -23,29 +23,28 @@ const Enter = () => {
   };
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        className={styles.homeContainer}
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className={styles.homeContainerButton}>
-          <button
+    <motion.div
+      className={styles.homeContainer}
+      initial={{ opacity: 0, y: 100 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ duration: 1 }}
+    >
+      <div className={styles.homeContainerButton}>
+        <button
+          className={styles.homeContainerButtonText}
+          onClick={handleEnter}
+        >
+          <GradientText
+            children="Enter"
+            showBorder={false}
+            animationSpeed={3}
             className={styles.homeContainerButtonText}
-            onClick={handleEnter}
-          >
-            <GradientText
-              children="Enter"
-              showBorder={false}
-              animationSpeed={3}
-              className={styles.homeContainerButtonText}
-              colors={["#FF8C00", "#808080", "#FFFFFF", "#808080", "#FF8C00"]}
-            />
-          </button>
-        </div>
-      </motion.div>
-    </AnimatePresence>
+            colors={["#FF8C00", "#808080", "#FFFFFF", "#808080", "#FF8C00"]}
+          />
+        </button>
+      </div>
+    </motion.div>
   );
 };
 
