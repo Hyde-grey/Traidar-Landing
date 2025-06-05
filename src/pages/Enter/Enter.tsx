@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./Enter.module.css";
 import useSound from "use-sound";
 import sound from "../../assets/AUDIO/AmbienttraidarFadein.mp3";
-import pulseSound from "../../assets/AUDIO/hearbeat.mp3";
+import pulseSound from "../../assets/AUDIO/Hearbeat.mp3";
 import { useSoundContext } from "../../context/SoundContext";
 import { useCallback, useEffect, useRef } from "react";
 
