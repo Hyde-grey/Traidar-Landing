@@ -4,7 +4,8 @@ import useSound from "use-sound";
 import sound from "../../assets/AUDIO/AmbienttraidarFadein.mp3";
 import pulseSound from "../../assets/AUDIO/Hearbeat.mp3";
 import { useSoundContext } from "../../context/SoundContext";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useState } from "react";
+import useAudioVisualize from "../../hooks/useAudioVisualize";
 
 import GradientText from "../../components/GradientText/GradientText";
 import { motion } from "framer-motion";
@@ -12,7 +13,7 @@ import { motion } from "framer-motion";
 const Enter = () => {
   const navigate = useNavigate();
   const { setIsAmbientPlaying, handleSoundComplete } = useSoundContext();
-  const timeoutRef = useRef<number | null>(null);
+  const [isPulseActive, setIsPulseActive] = useState<boolean>(false);
 
   const [playSound] = useSound(sound, {
     volume: 0.2,
@@ -20,9 +21,23 @@ const Enter = () => {
     onend: handleSoundComplete,
   });
 
-  const [playPulse, { stop: stopPulse }] = useSound(pulseSound, {
+  // Audio visualization hook
+  const { startVisualization, stopVisualization } = useAudioVisualize({
+    audioUrl: pulseSound,
     volume: 0.3,
-    loop: true,
+    onPulse: () => {
+      // Trigger pulse animation
+      setIsPulseActive(false);
+      requestAnimationFrame(() => {
+        setIsPulseActive(true);
+      });
+    },
+    sensitivity: {
+      volumeThreshold: 8,
+      volumeChangeThreshold: 5,
+      minInterval: 100,
+      maxPulses: 100,
+    },
   });
 
   const handleEnter = () => {
@@ -31,58 +46,14 @@ const Enter = () => {
     navigate("/Home");
   };
 
-  const handleMouseEnter = useCallback(() => {
-    playPulse();
-
-    // Clear any existing timeout
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-
-    // Start animation after 2 seconds
-    timeoutRef.current = window.setTimeout(() => {
-      const button = document.querySelector(
-        `.${styles.homeContainerButton} button`
-      );
-      if (button) {
-        button.classList.add(styles.pulseActive);
-      }
-    }, 2000);
-  }, [playPulse]);
+  const handleMouseEnter = useCallback(async () => {
+    await startVisualization();
+  }, [startVisualization]);
 
   const handleMouseLeave = useCallback(() => {
-    stopPulse();
-
-    // Clear the timeout if it exists
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-      timeoutRef.current = null;
-    }
-
-    // Remove the animation class
-    const button = document.querySelector(
-      `.${styles.homeContainerButton} button`
-    );
-    if (button) {
-      button.classList.remove(styles.pulseActive);
-    }
-  }, [stopPulse]);
-
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      stopPulse();
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-      const button = document.querySelector(
-        `.${styles.homeContainerButton} button`
-      );
-      if (button) {
-        button.classList.remove(styles.pulseActive);
-      }
-    };
-  }, [stopPulse]);
+    stopVisualization();
+    setIsPulseActive(false);
+  }, [stopVisualization]);
 
   return (
     <motion.div
@@ -94,7 +65,9 @@ const Enter = () => {
     >
       <div className={styles.homeContainerButton}>
         <button
-          className={styles.homeContainerButtonText}
+          className={`${styles.homeContainerButtonText} ${
+            isPulseActive ? styles.pulseActive : ""
+          }`}
           onClick={handleEnter}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
