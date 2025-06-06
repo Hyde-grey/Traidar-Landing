@@ -88,6 +88,7 @@ body {
   height: 100dvh;
   position: relative;
   padding: 6rem 8rem;
+  z-index: 1;
 }
 
 .mainCanvas {

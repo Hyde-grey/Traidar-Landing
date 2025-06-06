@@ -19,6 +19,7 @@ interface UseAudioVisualizeReturn {
   startVisualization: () => Promise<void>;
   stopVisualization: () => void;
   cleanup: () => void;
+  unlock: () => void;
 }
 
 const useAudioVisualize = ({
@@ -187,6 +188,16 @@ const useAudioVisualize = ({
     setIsReady(false);
   }, [stopVisualization]);
 
+  // Unlock AudioContext on user gesture
+  const unlock = useCallback(() => {
+    const ctx = audioContextRef.current;
+    if (ctx && ctx.state === "suspended") {
+      ctx.resume().catch(() => {
+        // ignore errors
+      });
+    }
+  }, []);
+
   // Cleanup on unmount
   useEffect(() => {
     return cleanup;
@@ -199,6 +210,7 @@ const useAudioVisualize = ({
     startVisualization,
     stopVisualization,
     cleanup,
+    unlock,
   };
 };
 

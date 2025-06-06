@@ -11,11 +11,10 @@
   background: transparent !important;
   display: block;
   transform-origin: center center;
-  transform: scale(1.7);
   position: absolute;
-  top: 30%;
-  left: 30%;
-
+  top: 50%;
+  left: 70%;
+  transform: translate(-50%, -50%) scale(1);
   width: 100%;
   height: 100%;
 }
@@ -49,8 +48,8 @@
     margin-top: 12rem;
   }
   .orb-container canvas {
-    transform: scale(1.5);
-    top: 30%;
-    left: 40%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.5);
   }
 }

@@ -4,16 +4,20 @@ import useSound from "use-sound";
 import sound from "../../assets/AUDIO/AmbienttraidarFadein.mp3";
 import pulseSound from "../../assets/AUDIO/Hearbeat.mp3";
 import { useSoundContext } from "../../context/SoundContext";
-import { useCallback, useState } from "react";
-import useAudioVisualize from "../../hooks/useAudioVisualize";
-
+import { useCallback, useRef, useState } from "react";
 import GradientText from "../../components/GradientText/GradientText";
+import BreathingExercise, {
+  type BreathingExerciseRef,
+} from "../../components/BreathingExercise";
 import { motion } from "framer-motion";
 
 const Enter = () => {
   const navigate = useNavigate();
   const { setIsAmbientPlaying, handleSoundComplete } = useSoundContext();
   const [isPulseActive, setIsPulseActive] = useState<boolean>(false);
+  const [breathingScale, setBreathingScale] = useState<number>(1);
+
+  const breathingExerciseRef = useRef<BreathingExerciseRef>(null);
 
   const [playSound] = useSound(sound, {
     volume: 0.2,
@@ -21,67 +25,77 @@ const Enter = () => {
     onend: handleSoundComplete,
   });
 
-  // Audio visualization hook
-  const { startVisualization, stopVisualization } = useAudioVisualize({
-    audioUrl: pulseSound,
-    volume: 0.3,
-    onPulse: () => {
-      // Trigger pulse animation
-      setIsPulseActive(false);
-      requestAnimationFrame(() => {
-        setIsPulseActive(true);
-      });
-    },
-    sensitivity: {
-      volumeThreshold: 8,
-      volumeChangeThreshold: 5,
-      minInterval: 100,
-      maxPulses: 100,
-    },
-  });
-
-  const handleEnter = () => {
+  const handleEnter = useCallback(() => {
     playSound();
     setIsAmbientPlaying(true);
     navigate("/Home");
-  };
+  }, [playSound, setIsAmbientPlaying, navigate]);
 
-  const handleMouseEnter = useCallback(async () => {
-    await startVisualization();
-  }, [startVisualization]);
-
-  const handleMouseLeave = useCallback(() => {
-    stopVisualization();
+  const handlePulse = useCallback(() => {
     setIsPulseActive(false);
-  }, [stopVisualization]);
+    requestAnimationFrame(() => {
+      setIsPulseActive(true);
+    });
+  }, []);
+
+  const handleBreathingScaleChange = useCallback((scale: number) => {
+    setBreathingScale(scale);
+  }, []);
+
+  // Click handler triggers the animation and navigation flow
+  const handleClick = useCallback((e: React.MouseEvent | React.TouchEvent) => {
+    e.preventDefault();
+    breathingExerciseRef.current?.unlockAudio();
+    breathingExerciseRef.current?.startExercise();
+  }, []);
 
   return (
-    <motion.div
-      className={styles.homeContainer}
-      initial={{ opacity: 0, y: 100 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ duration: 1 }}
-    >
-      <div className={styles.homeContainerButton}>
-        <button
-          className={`${styles.homeContainerButtonText} ${
-            isPulseActive ? styles.pulseActive : ""
-          }`}
-          onClick={handleEnter}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          <GradientText
-            children="Enter"
-            showBorder={false}
-            animationSpeed={3}
-            className={styles.homeContainerButtonText}
-            colors={["#FF8C00", "#808080", "#FFFFFF", "#808080", "#FF8C00"]}
-          />
-        </button>
-      </div>
-    </motion.div>
+    <div className={styles.homeContainer}>
+      <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.9 }}
+        transition={{ duration: 1 }}
+        className={styles.homeContainerMotion}
+      >
+        {/* Breathing Exercise Component */}
+        <BreathingExercise
+          ref={breathingExerciseRef}
+          audioUrl={pulseSound}
+          duration={4000}
+          onComplete={handleEnter}
+          onPulse={handlePulse}
+          onBreathingScaleChange={handleBreathingScaleChange}
+        />
+
+        {/* Enter Button - Fixed position, centered on viewport */}
+        <div className={styles.enterWrapper}>
+          <motion.button
+            className={`${styles.homeContainerButtonText} ${
+              styles.enterButton
+            } ${isPulseActive ? styles.pulseActive : ""}`}
+            onClick={handleClick}
+            animate={{
+              scale: breathingScale,
+            }}
+            transition={{
+              scale: {
+                duration: breathingScale !== 1 ? 2.5 : 0.2,
+                ease: "easeInOut",
+              },
+            }}
+          >
+            <GradientText
+              children="Enter"
+              showBorder={false}
+              animationSpeed={3}
+              className={styles.homeContainerButtonText}
+              colors={["#FF8C00", "#808080", "#FFFFFF", "#808080", "#FF8C00"]}
+            />
+          </motion.button>
+        </div>
+      </motion.div>
+    </div>
   );
 };
 

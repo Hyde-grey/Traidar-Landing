@@ -11,19 +11,39 @@ const Home = () => {
   const [forceHoverState, setForceHoverState] = useState(false);
   return (
     <motion.div
+      className={styles.homeWrapper}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="appContainer">
+      <motion.div
+        initial={{ opacity: 0, y: 400 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 400 }}
+        transition={{ duration: 0.5, delay: 7.5 }}
+        className="appContainer"
+      >
         <Logo />
         <Title setForceHoverState={setForceHoverState} />
-      </div>
+      </motion.div>
+      {/* Dark overlay between title and rest of page */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5, delay: 7.5 }}
+        className={styles.pageOverlay}
+      />
       <motion.div
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 6, delay: 0.5 }}
+        transition={{
+          duration: 6,
+          delay: 7,
+          ease: "easeInOut",
+          scale: { duration: 2, delay: 8 },
+        }}
         className="mainCanvas"
       >
         <Orb
@@ -71,7 +91,7 @@ const Home = () => {
           <directionalLight
             color="#f38439"
             position={[5, 1, -5]}
-            intensity={3}
+            intensity={15}
           />
           {/* White key light for front illumination */}
           <directionalLight
@@ -79,7 +99,7 @@ const Home = () => {
             position={[-5, 2, 5]}
             intensity={10}
           />
-          <Float>
+          <Float rotationIntensity={0} floatIntensity={1.5}>
             <TraidarLaptop />
           </Float>
         </Canvas>

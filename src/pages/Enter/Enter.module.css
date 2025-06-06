@@ -7,6 +7,18 @@
   position: absolute;
   top: 0;
   left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.homeContainerMotion {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
 }
 
 .homeContainerButton {
@@ -19,8 +31,8 @@
 }
 
 .homeContainer button {
+  /* Minimal styles - most styling moved to inline */
   background-color: transparent;
-  color: var(--color-light-2);
   border: none;
   cursor: pointer;
   transition: all 3s ease-in-out;
@@ -34,6 +46,30 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.enterButton {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  z-index: 10;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  font-size: 5rem;
+  font-weight: 600;
+  color: var(--color-light-2);
+}
+
+.enterButtonGrabbing {
+  cursor: grabbing;
+}
+
+.enterButtonPointer {
+  cursor: pointer;
 }
 
 .homeContainer button::before,
@@ -55,22 +91,11 @@
   animation-play-state: running;
 }
 
-.homeContainer button.pulseActive::after {
-  animation-delay: 0.1s;
-}
-
 .homeContainerButtonText {
   font-size: 5rem !important;
   position: relative;
-  z-index: 2;
-  transition: all 3s ease-in-out;
   width: fit-content;
   height: fit-content;
-}
-
-button:hover .homeContainerButtonText {
-  font-size: 10rem !important;
-  transition: all 3s ease-in-out;
 }
 
 @keyframes pulseBorder {
@@ -91,5 +116,20 @@ button:hover .homeContainerButtonText {
       inset 0px 0px 30px 0px rgba(245, 144, 58, 0);
     transform: scale(3);
     opacity: 0;
+  }
+}
+
+/* Wrapper to center the Enter button; motion.button handles its own scaling */
+.enterWrapper {
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+@media (max-width: 768px) {
+  .enterButton {
+    font-size: 2rem !important;
   }
 }

@@ -19,10 +19,11 @@ const Title = ({
     >
       <LaunchingSoon />
 
-      <h1 className={styles.title}>Every trade sharper, with AI</h1>
+      <h1 className={styles.title}>Optimise Trade Performance, with AI.</h1>
       <p className={styles.subText}>
-        Built for traders who move with intent. Traidar delivers instant AI
-        insights that help you cut noise and act with clarity.
+        Built for traders who move with intent. Utilise AI to drive trade
+        performance, analyse multi-asset markets, economic events and next level
+        journaling.
       </p>
       <Newsletter setForceHoverState={setForceHoverState} />
     </motion.div>

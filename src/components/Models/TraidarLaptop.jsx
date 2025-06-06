@@ -39,16 +39,16 @@ export function TraidarLaptop(props) {
     <group
       ref={group}
       {...props}
-      position={[3.5, -2, -5]}
-      rotation={[0, -1.5, 0]}
-      scale={22}
+      position={[3.5, -3, -5]}
+      rotation={[0, 0, 0]}
+      scale={30}
       dispose={null}
     >
       <group name="Scene">
         <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
           <group
             name="e91829aaa22747909a0071cc2eedf941fbx"
-            rotation={[Math.PI / 2, 0, 0]}
+            rotation={[Math.PI / 2, -0.5, 0]}
             scale={0.01}
           >
             <group name="Object_2">
