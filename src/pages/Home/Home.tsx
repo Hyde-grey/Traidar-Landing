@@ -13,15 +13,21 @@ const Home = () => {
     <motion.div
       className={styles.homeWrapper}
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
+      animate={{ opacity: 1, transition: { duration: 0.6, ease: "easeOut" } }}
+      exit={{ opacity: 0, transition: { duration: 0.3, ease: "easeIn" } }}
     >
       <motion.div
         initial={{ opacity: 0, y: 400 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 400 }}
-        transition={{ duration: 0.5, delay: 7.5 }}
+        animate={{
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.5, delay: 7.5, ease: "easeOut" },
+        }}
+        exit={{
+          opacity: 0,
+          y: 400,
+          transition: { duration: 0.3, ease: "easeIn" },
+        }}
         className="appContainer"
       >
         <Logo />
@@ -30,19 +36,19 @@ const Home = () => {
       {/* Dark overlay between title and rest of page */}
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.5, delay: 7.5 }}
+        animate={{
+          opacity: 1,
+          transition: { duration: 0.5, delay: 7.5, ease: "easeOut" },
+        }}
+        exit={{ opacity: 0, transition: { duration: 0.3, ease: "easeIn" } }}
         className={styles.pageOverlay}
       />
       <motion.div
         initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          duration: 6,
-          delay: 7,
-          ease: "easeInOut",
-          scale: { duration: 2, delay: 8 },
+        animate={{
+          opacity: 1,
+          y: 0,
+          transition: { duration: 6, delay: 7, ease: "easeInOut" },
         }}
         className="mainCanvas"
       >
@@ -54,9 +60,16 @@ const Home = () => {
       </motion.div>
       <motion.div
         initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.9 }}
-        transition={{ duration: 1, delay: 1 }}
+        animate={{
+          opacity: 1,
+          y: 0,
+          transition: { duration: 1, delay: 1, ease: "easeOut" },
+        }}
+        exit={{
+          opacity: 0,
+          scale: 0.9,
+          transition: { duration: 0.3, ease: "easeIn" },
+        }}
         className={styles.canvasContainer}
       >
         <Canvas

@@ -181,13 +181,13 @@ const BreathingExercise = forwardRef<
 
       switch (breathingPhase) {
         case "breathe":
-          return "Loading experiance...";
+          return "Loading experience...";
         case "hold":
-          return "Loading experiance...";
+          return "Loading experience...";
         case "release":
-          return "Loading experiance...";
+          return "Loading experience...";
         default:
-          return "Loading experiance...";
+          return "Loading experience...";
       }
     };
 
