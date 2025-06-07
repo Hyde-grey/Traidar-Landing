@@ -29,7 +29,7 @@
 
 .instructionsText {
   position: fixed;
-  top: 35vh;
+  top: 33dvh;
   left: 50vw;
   transform: translate(-50%, -50%) !important;
   text-align: center;
