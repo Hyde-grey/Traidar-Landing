@@ -5,7 +5,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { TraidarLaptop } from "../../components/Models/TraidarLaptop";
 import { Canvas } from "@react-three/fiber";
-import { Float, PerspectiveCamera, OrbitControls } from "@react-three/drei";
+import { Float, PerspectiveCamera } from "@react-three/drei";
 import styles from "./Home.module.css";
 const Home = () => {
   const [forceHoverState, setForceHoverState] = useState(false);
