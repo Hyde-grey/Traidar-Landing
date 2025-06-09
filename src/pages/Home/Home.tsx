@@ -48,7 +48,7 @@ const Home = () => {
         animate={{
           opacity: 1,
           y: 0,
-          transition: { duration: 6, delay: 7, ease: "easeInOut" },
+          transition: { duration: 5, delay: 0.5, ease: "easeInOut" },
         }}
         className="mainCanvas"
       >
@@ -82,35 +82,32 @@ const Home = () => {
             zIndex: -1,
           }}
         >
-          <OrbitControls
-            enableZoom={true}
-            enablePan={true}
-            enableRotate={true}
-            minPolarAngle={Math.PI / 4}
-            maxPolarAngle={Math.PI / 1.5}
-            minDistance={5}
-            maxDistance={15}
-            enableDamping={true}
-            dampingFactor={0.05}
-            rotateSpeed={0.5}
-            zoomSpeed={0.5}
-            panSpeed={0.5}
-          />
           <PerspectiveCamera makeDefault position={[0, 0, 10]} fov={45} />
-          {/* Ambient and fill lights */}
-          <ambientLight intensity={0.2} />
-          <hemisphereLight args={["#ffffff", "#000000", 0.3]} />
-          {/* Orange rim/back light from right side */}
+          {/* Base ambient light for overall scene illumination */}
+          <ambientLight intensity={0.3} />
+
+          {/* Hemisphere light for natural sky/ground lighting */}
+          <hemisphereLight args={["#ffffff", "#000000", 0.5]} />
+
+          {/* Main key light - warm white for primary illumination */}
           <directionalLight
-            color="#f38439"
-            position={[5, 1, -5]}
-            intensity={15}
+            position={[-5, 5, 5]}
+            intensity={2}
+            color="#fff5e6"
           />
-          {/* White key light for front illumination */}
+
+          {/* Fill light - softer orange glow from right */}
           <directionalLight
-            color="#ffffff"
-            position={[-5, 2, 5]}
-            intensity={10}
+            position={[5, 3, 2]}
+            intensity={1.5}
+            color="#f38439"
+          />
+
+          {/* Rim light - cool blue backlight for edge definition */}
+          <directionalLight
+            position={[0, 2, -5]}
+            intensity={0.8}
+            color="#f38439"
           />
           <Float rotationIntensity={0} floatIntensity={1.5}>
             <TraidarLaptop />
